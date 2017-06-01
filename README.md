@@ -2,7 +2,7 @@
 
 This refactoring kata aims to let you practice with one of the main functional programming building block: **Functional Structures**.
 
-The starting code implements a use case with an imperative approach. Your mission is to **remove every effects** (aka computational context) within the [confirmCart](https://github.com/matteobaglini/functional-structures-refactoring-kata/blob/master/src/main/scala/App.scala#L5) function with the power of Functional Structures.
+The starting code implements a use case with an imperative approach. Your mission is to **remove every effects** (aka computational context) within the [applyDiscount](https://github.com/matteobaglini/functional-structures-refactoring-kata/blob/master/src/main/scala/App.scala#L5) function with the power of Functional Structures.
 
 The code is written in Scala.
 

@@ -2,13 +2,15 @@ import Models._
 
 object App {
 
-  def confirmCart(cartId: CartId, storage: Storage[Order]): Unit = {
+  def applyDiscount(cartId: CartId, storage: Storage[Order]): Unit = {
     val cart: Cart = loadCart(cartId)
     if (cart != Cart.missingCart) {
       val rule: DiscountRule = lookupCustomerDiscountRule(cart.customerId)
-      val discount: Double = if (rule != DiscountRule.noDiscount) rule(cart) else 0
-      val order: Order = makeOrder(cart, discount)
-      saveOrder(order, storage)
+      if (rule != DiscountRule.noDiscount) {
+        val discount: Double = rule(cart)
+        val order: Order = makeOrder(cart, discount)
+        saveOrder(order, storage)
+      }
     }
   }
 
