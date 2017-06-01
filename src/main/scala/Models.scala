@@ -8,9 +8,6 @@ object Models {
     val missingCart = new Cart(CartId(""), CustomerId(""), 0)
   }
 
-  case class OrderId(value: String)
-  case class Order(id: OrderId, customerId: CustomerId, total: Double)
-
   case class DiscountRule(f: Cart => Double) extends (Cart => Double) {
     def apply(c: Cart): Double = f(c)
   }

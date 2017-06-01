@@ -10,7 +10,7 @@ class AppTests extends FunSuite {
 
     applyDiscount(cartId, storage)
 
-    assert(storage.saved.get == Order(OrderId("ZXC482764JN"), CustomerId("gold-customer"), 50))
+    assert(storage.saved.get == Cart(CartId("some-gold-cart"),CustomerId("gold-customer"),50.0) )
   }
 
   test("no discount") {
@@ -31,8 +31,8 @@ class AppTests extends FunSuite {
     assert(storage.saved.isEmpty)
   }
 
-  class SpyStorage extends Storage[Order] {
-    var saved: Option[Order] = None
-    override def flush(a: Order): Unit = saved = Some(a)
+  class SpyStorage extends Storage[Cart] {
+    var saved: Option[Cart] = None
+    override def flush(value: Cart): Unit = saved = Some(value)
   }
 }
