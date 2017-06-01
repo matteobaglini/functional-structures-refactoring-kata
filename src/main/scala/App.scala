@@ -5,12 +5,10 @@ object App {
 
   def applyDiscount(cartId: CartId, storage: Storage[Cart]): Unit = {
     val cart: Option[Cart] = loadCart(cartId)
-    if (cart.isDefined) {
-      val rule: Option[DiscountRule] = lookupCustomerDiscountRule(cart.get.customerId)
-      val discount: Option[Double] = rule.ap(cart)
-      val updatedCart: Option[Cart] = discount.map(d => updateAmount(cart.get, d))
-      updatedCart.map(uc => save(uc, storage))
-    }
+    val rule: Option[DiscountRule] = cart.flatMap(c => lookupCustomerDiscountRule(c.customerId))
+    val discount: Option[Double] = rule.ap(cart)
+    val updatedCart: Option[Cart] = cart.flatMap(c => discount.map(d => updateAmount(c, d)))
+    updatedCart.map(uc => save(uc, storage))
   }
 
   def loadCart(id: CartId): Option[Cart] =
