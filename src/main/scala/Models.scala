@@ -11,8 +11,5 @@ object Models {
   case class DiscountRule(f: Cart => Double) extends (Cart => Double) {
     def apply(c: Cart): Double = f(c)
   }
-  object DiscountRule {
-    val noDiscount = DiscountRule(_ => throw new RuntimeException("no discount"))
-  }
 
 }
