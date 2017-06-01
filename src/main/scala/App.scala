@@ -1,14 +1,15 @@
 import Models._
-import cats.implicits._
 
 object App {
 
   def applyDiscount(cartId: CartId, storage: Storage[Cart]): Unit = {
-    val cart: Option[Cart] = loadCart(cartId)
-    val rule: Option[DiscountRule] = cart.flatMap(c => lookupCustomerDiscountRule(c.customerId))
-    val discount: Option[Double] = rule.ap(cart)
-    val updatedCart: Option[Cart] = cart.flatMap(c => discount.map(d => updateAmount(c, d)))
-    updatedCart.map(uc => save(uc, storage))
+    for {
+      cart <- loadCart(cartId)
+      rule <- lookupCustomerDiscountRule(cart.customerId)
+      discount = rule(cart)
+      updatedCart = updateAmount(cart, discount)
+      _ = save(updatedCart, storage)
+    } yield ()
   }
 
   def loadCart(id: CartId): Option[Cart] =
