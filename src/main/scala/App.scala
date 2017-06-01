@@ -6,11 +6,9 @@ object App {
     val cart: Cart = loadCart(cartId)
     if (cart != Cart.missingCart) {
       val rule: Option[DiscountRule] = lookupCustomerDiscountRule(cart.customerId)
-      if (rule.isDefined) {
-        val discount: Double = rule.get(cart)
-        val updatedCart: Cart = updateAmount(cart, discount)
-        save(updatedCart, storage)
-      }
+      val discount: Option[Double] = rule.map(r => r(cart))
+      val updatedCart: Option[Cart] = discount.map(d => updateAmount(cart, d))
+      updatedCart.map(uc => save(uc, storage))
     }
   }
 
