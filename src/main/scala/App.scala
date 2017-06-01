@@ -3,19 +3,19 @@ import Models._
 object App {
 
   def applyDiscount(cartId: CartId, storage: Storage[Cart]): Unit = {
-    val cart: Cart = loadCart(cartId)
-    if (cart != Cart.missingCart) {
-      val rule: Option[DiscountRule] = lookupCustomerDiscountRule(cart.customerId)
-      val discount: Option[Double] = rule.map(r => r(cart))
-      val updatedCart: Option[Cart] = discount.map(d => updateAmount(cart, d))
+    val cart: Option[Cart] = loadCart(cartId)
+    if (cart.isDefined) {
+      val rule: Option[DiscountRule] = lookupCustomerDiscountRule(cart.get.customerId)
+      val discount: Option[Double] = rule.map(r => r(cart.get))
+      val updatedCart: Option[Cart] = discount.map(d => updateAmount(cart.get, d))
       updatedCart.map(uc => save(uc, storage))
     }
   }
 
-  def loadCart(id: CartId): Cart =
-    if (id.value.contains("gold")) Cart(id, CustomerId("gold-customer"), 100)
-    else if (id.value.contains("normal")) Cart(id, CustomerId("normal-customer"), 100)
-    else Cart.missingCart
+  def loadCart(id: CartId): Option[Cart] =
+    if (id.value.contains("gold")) Some(Cart(id, CustomerId("gold-customer"), 100))
+    else if (id.value.contains("normal")) Some(Cart(id, CustomerId("normal-customer"), 100))
+    else None
 
   def lookupCustomerDiscountRule(id: CustomerId): Option[DiscountRule] =
     if (id.value.contains("gold")) Some(DiscountRule(half))
