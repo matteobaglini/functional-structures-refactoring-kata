@@ -1,4 +1,5 @@
 import Models._
+import cats.implicits._
 
 object App {
 
@@ -6,7 +7,7 @@ object App {
     val cart: Option[Cart] = loadCart(cartId)
     if (cart.isDefined) {
       val rule: Option[DiscountRule] = lookupCustomerDiscountRule(cart.get.customerId)
-      val discount: Option[Double] = rule.map(r => r(cart.get))
+      val discount: Option[Double] = rule.ap(cart)
       val updatedCart: Option[Cart] = discount.map(d => updateAmount(cart.get, d))
       updatedCart.map(uc => save(uc, storage))
     }
