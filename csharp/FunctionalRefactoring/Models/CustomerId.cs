@@ -6,10 +6,7 @@ namespace FunctionalRefactoring.Models
     {
         public String Value { get; }
 
-        public CustomerId(String value)
-        {
-            Value = value;
-        }
+        public CustomerId(String value) => Value = value;
 
         Boolean Equals(CustomerId other) => String.Equals(Value, other.Value);
 

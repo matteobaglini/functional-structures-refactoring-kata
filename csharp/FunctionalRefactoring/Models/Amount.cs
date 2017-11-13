@@ -6,10 +6,7 @@ namespace FunctionalRefactoring.Models
     {
         public Decimal Value { get; }
 
-        public Amount(Decimal value)
-        {
-            Value = value;
-        }
+        public Amount(Decimal value) => Value = value;
 
         Boolean Equals(Amount other) => Value == other.Value;
 

@@ -8,10 +8,7 @@ namespace FunctionalRefactoring.Models
 
         public Func<Cart, Amount> Compute { get; }
 
-        public DiscountRule(Func<Cart, Amount> compute)
-        {
-            Compute = compute;
-        }
+        public DiscountRule(Func<Cart, Amount> compute) => Compute = compute;
 
         Boolean Equals(DiscountRule other) => Equals(Compute, other.Compute);
 
