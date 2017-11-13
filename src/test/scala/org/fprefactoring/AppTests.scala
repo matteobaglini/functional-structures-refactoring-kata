@@ -12,7 +12,7 @@ class AppTests extends FunSuite {
 
     applyDiscount(cartId, storage)
 
-    assert(storage.saved.get == Cart(CartId("some-gold-cart"),CustomerId("gold-customer"),50.0) )
+    assert(storage.saved.get == Cart(CartId("some-gold-cart"), CustomerId("gold-customer"), Amount(50)))
   }
 
   test("no discount") {
