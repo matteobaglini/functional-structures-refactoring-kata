@@ -1,3 +1,5 @@
+package org.fprefactoring
+
 object Models {
 
   case class CustomerId(value: String)

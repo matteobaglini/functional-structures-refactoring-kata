@@ -1,4 +1,6 @@
-import Models._
+package org.fprefactoring
+
+import org.fprefactoring.Models.{Cart, CartId, CustomerId, DiscountRule}
 
 object App {
 

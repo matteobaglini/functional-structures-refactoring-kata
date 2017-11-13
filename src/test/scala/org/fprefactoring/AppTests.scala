@@ -1,5 +1,7 @@
-import App._
-import Models._
+package org.fprefactoring
+
+import org.fprefactoring.App._
+import org.fprefactoring.Models._
 import org.scalatest.FunSuite
 
 class AppTests extends FunSuite {
