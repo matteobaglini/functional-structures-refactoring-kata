@@ -9,7 +9,7 @@ object App {
     if (cart != Cart.missingCart) {
       val rule: DiscountRule = lookupCustomerDiscountRule(cart.customerId)
       if (rule != DiscountRule.noDiscount) {
-        val discount: Double = rule(cart)
+        val discount: BigDecimal = rule(cart)
         val updatedCart: Cart = updateAmount(cart, discount)
         save(updatedCart, storage)
       }
@@ -25,10 +25,10 @@ object App {
     if (id.value.contains("gold")) DiscountRule(half)
     else DiscountRule.noDiscount
 
-  def half(cart: Cart): Double =
+  def half(cart: Cart): BigDecimal =
     cart.amount / 2
 
-  def updateAmount(cart: Cart, discount: Double): Cart =
+  def updateAmount(cart: Cart, discount: BigDecimal): Cart =
     cart.copy(id = cart.id, customerId = cart.customerId, amount = cart.amount - discount)
 
   def save(cart: Cart, storage: Storage[Cart]): Unit =
