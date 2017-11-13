@@ -21,19 +21,17 @@ namespace FunctionalRefactoring
 
         static Cart LoadCart(CartId id)
         {
-            var result = Cart.MissingCart;
             if (id.Value.Contains("gold"))
-                result = new Cart(id, new CustomerId("gold-customer"), new Amount(100));
-            else if (id.Value.Contains("normal"))
-                result = new Cart(id, new CustomerId("normal-customer"), new Amount(100));
-            return result;
+                return new Cart(id, new CustomerId("gold-customer"), new Amount(100));
+            if (id.Value.Contains("normal"))
+                return new Cart(id, new CustomerId("normal-customer"), new Amount(100));
+            return Cart.MissingCart;
         }
 
         static DiscountRule LookupCustomerDiscountRule(CustomerId id)
         {
-            var result = DiscountRule.NoDiscount;
-            if (id.Value.Contains("gold")) result = new DiscountRule(Half);
-            return result;
+            if (id.Value.Contains("gold")) return new DiscountRule(Half);
+            return DiscountRule.NoDiscount;
         }
 
         static Cart UpdateAmount(Cart cart, Amount discount)
