@@ -5,12 +5,12 @@ import org.fprefactoring.Models.{Cart, CartId, CustomerId, DiscountRule}
 object App {
 
   def applyDiscount(cartId: CartId, storage: Storage[Cart]): Unit = {
-    val cart: Cart = loadCart(cartId)
+    val cart = loadCart(cartId)
     if (cart != Cart.missingCart) {
-      val rule: DiscountRule = lookupCustomerDiscountRule(cart.customerId)
+      val rule = lookupCustomerDiscountRule(cart.customerId)
       if (rule != DiscountRule.noDiscount) {
-        val discount: BigDecimal = rule(cart)
-        val updatedCart: Cart = updateAmount(cart, discount)
+        val discount = rule(cart)
+        val updatedCart = updateAmount(cart, discount)
         save(updatedCart, storage)
       }
     }
