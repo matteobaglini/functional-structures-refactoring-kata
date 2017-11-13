@@ -4,7 +4,7 @@ This refactoring kata aims to let you practice with one of the main functional p
 
 The starting code implements a use case with an imperative approach. Your mission is to **remove every effects** (aka computational context) within the ``applyDiscount`` function with the power of Functional Structures.
 
-The code is written in Scala.
+The code is implemented in different languages. Is your favorite language missing? Please consider to contribute with a Pull Request or open an Issue.
 
 # How to use this Kata
 
@@ -12,7 +12,7 @@ The simplest way is to just clone the code and start hacking right away improvin
 
 # Proposed Solution
 
-You can take a look at my refactored code wich you will find inside the [solution branch](https://github.com/matteobaglini/functional-structures-refactoring-kata/tree/solution).
+You can take a look at my refactored code (in Scala) wich you will find inside the [solution branch](https://github.com/matteobaglini/functional-structures-refactoring-kata/tree/solution).
 
 # Learning Materials
 
