@@ -8,7 +8,7 @@ public class App {
     public static void applyDiscount(CartId cartId, Storage<Cart> storage) {
         Cart cart = loadCart(cartId);
         if (cart != Cart.MissingCart) {
-            DiscountRule rule = lookupCustomerDiscountRule(cart.customerId);
+            DiscountRule rule = lookupDiscountRule(cart.customerId);
             if (rule != DiscountRule.NoDiscount) {
                 Amount discount = rule.apply(cart);
                 Cart updatedCart = updateAmount(cart, discount);
@@ -25,7 +25,7 @@ public class App {
         return Cart.MissingCart;
     }
 
-    private static DiscountRule lookupCustomerDiscountRule(CustomerId id) {
+    private static DiscountRule lookupDiscountRule(CustomerId id) {
         if (id.value.contains("gold")) return new DiscountRule(App::half);
         return DiscountRule.NoDiscount;
     }
