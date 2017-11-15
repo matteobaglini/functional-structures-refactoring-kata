@@ -7,7 +7,7 @@ object App {
   def applyDiscount(cartId: CartId, storage: Storage[Cart]): Unit = {
     val cart = loadCart(cartId)
     if (cart != Cart.missingCart) {
-      val rule = lookupCustomerDiscountRule(cart.customerId)
+      val rule = lookupDiscountRule(cart.customerId)
       if (rule != DiscountRule.noDiscount) {
         val discount = rule(cart)
         val updatedCart = updateAmount(cart, discount)
@@ -21,7 +21,7 @@ object App {
     else if (id.value.contains("normal")) Cart(id, CustomerId("normal-customer"), Amount(100))
     else Cart.missingCart
 
-  def lookupCustomerDiscountRule(id: CustomerId): DiscountRule =
+  def lookupDiscountRule(id: CustomerId): DiscountRule =
     if (id.value.contains("gold")) DiscountRule(half)
     else DiscountRule.noDiscount
 
