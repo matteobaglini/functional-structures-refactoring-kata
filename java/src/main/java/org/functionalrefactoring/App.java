@@ -7,11 +7,9 @@ import java.math.BigDecimal;
 public class App {
     public static void applyDiscount(CartId cartId, Storage<Cart> storage) {
         Cart cart = loadCart(cartId);
-        if (cart != Cart.MissingCart)
-        {
+        if (cart != Cart.MissingCart) {
             DiscountRule rule = lookupCustomerDiscountRule(cart.customerId);
-            if (rule != DiscountRule.NoDiscount)
-            {
+            if (rule != DiscountRule.NoDiscount) {
                 Amount discount = rule.apply(cart);
                 Cart updatedCart = updateAmount(cart, discount);
                 save(updatedCart, storage);
