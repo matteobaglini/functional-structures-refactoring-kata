@@ -9,7 +9,7 @@ namespace FunctionalRefactoring
             var cart = LoadCart(cartId);
             if (cart != Cart.MissingCart)
             {
-                var rule = LookupCustomerDiscountRule(cart.CustomerId);
+                var rule = LookupDiscountRule(cart.CustomerId);
                 if (rule != DiscountRule.NoDiscount)
                 {
                     var discount = rule.Compute(cart);
@@ -28,7 +28,7 @@ namespace FunctionalRefactoring
             return Cart.MissingCart;
         }
 
-        static DiscountRule LookupCustomerDiscountRule(CustomerId id)
+        static DiscountRule LookupDiscountRule(CustomerId id)
         {
             if (id.Value.Contains("gold")) return new DiscountRule(Half);
             return DiscountRule.NoDiscount;
