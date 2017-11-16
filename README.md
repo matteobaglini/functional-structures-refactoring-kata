@@ -18,6 +18,7 @@ You can take a look at my refactored code (in Scala) wich you will find inside t
 
 - [Why Functional Programming? It’s the composition.](https://tech.iheart.com/why-fp-its-the-composition-f585d17b01d3)
 - [Functors, Applicatives, And Monads In Pictures](http://adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html)
+- [Scala Typeclassopedia with John Kodumal](https://www.youtube.com/watch?v=IMGCDph1fNY)
 - [Functional Structures in Scala](https://www.youtube.com/watch?v=Dsd4pc99FSY&list=PLFrwDVdSrYE6dy14XCmUtRAJuhCxuzJp0)
 
 # License
