@@ -25,6 +25,14 @@ object App {
     updatedCart.modify(uc => save(uc, storage))
   }
 
+  def applyDiscountIdeal(cartId: CartId, storage: Storage[Cart]): Unit = {
+    val cart = loadCart(cartId)
+    val rule = lookupDiscountRule(cart.customerId)
+    val discount = rule(cart)
+    val updatedCart = updateAmount(cart, discount)
+    save(updatedCart, storage)
+  }
+
   private def loadCartResult(cartId: CartId): BoolResult[Cart] = {
     val cart = loadCart(cartId)
     if (cart != Cart.missingCart) TrueResult(cart) else FalseResult()
