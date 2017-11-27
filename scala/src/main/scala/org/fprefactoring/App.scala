@@ -5,13 +5,13 @@ import org.fprefactoring.Models._
 object App {
 
   trait BoolResult[+A] {
-    def applyFunc[B](f: A => B): BoolResult[B]
+    def modify[B](f: A => B): BoolResult[B]
   }
   case class TrueResult[A](value: A) extends BoolResult[A] {
-    override def applyFunc[B](f: (A) => B): BoolResult[B] = TrueResult(f(value))
+    override def modify[B](f: (A) => B): BoolResult[B] = TrueResult(f(value))
   }
   case class FalseResult[A]() extends BoolResult[A] {
-    override def applyFunc[B](f: (A) => B): BoolResult[B] = FalseResult()
+    override def modify[B](f: (A) => B): BoolResult[B] = FalseResult()
   }
 
   def applyDiscount(cartId: CartId, storage: Storage[Cart]): Unit = {
@@ -19,9 +19,9 @@ object App {
     val loadResult = if (cart != Cart.missingCart) TrueResult(cart) else FalseResult()
     if (cart != Cart.missingCart) {
       val rule = lookupDiscountRuleResult(cart)
-      val discount = rule.applyFunc(r => r(cart))
-      val updatedCart = discount.applyFunc(d => updateAmount(cart, d))
-      updatedCart.applyFunc(uc => save(uc, storage))
+      val discount = rule.modify(r => r(cart))
+      val updatedCart = discount.modify(d => updateAmount(cart, d))
+      updatedCart.modify(uc => save(uc, storage))
     }
   }
 
