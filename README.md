@@ -12,7 +12,7 @@ The simplest way is to just clone the code and start hacking right away improvin
 
 # Proposed Solution
 
-You can take a look at my refactored code (in Scala) wich you will find inside the [solution branch](https://github.com/matteobaglini/functional-structures-refactoring-kata/tree/solution).
+You can take a look at my refactored code (in Scala) wich you will find inside one of the [solution-* branchs](https://github.com/matteobaglini/functional-structures-refactoring-kata/branches).
 
 # Learning Materials
 
