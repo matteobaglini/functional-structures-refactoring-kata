@@ -18,41 +18,11 @@ object App {
   }
 
   def applyDiscount(cartId: CartId, storage: Storage[Cart]): Unit = {
-    for {
-      cart <- loadCartResult(cartId)
-      rule <- lookupDiscountRuleResult(cart)
-      discount = rule(cart)
-      updated = updateAmount(cart, discount)
-      _ = save(updated, storage)
-    } yield ()
-  }
-
-  def applyDiscountManual(cartId: CartId, storage: Storage[Cart]): Unit = {
     val cart = loadCartResult(cartId)
     val rule = cart.flatMap(c => lookupDiscountRuleResult(c))
     val discount = cart.flatMap(c => rule.map(r => r(c)))
     val updatedCart = cart.flatMap(c => discount.map(d => updateAmount(c, d)))
     updatedCart.map(uc => save(uc, storage))
-  }
-
-  def applyDiscountIdeal(cartId: CartId, storage: Storage[Cart]): Unit = {
-    val cart = loadCart(cartId)
-    val rule = lookupDiscountRule(cart.customerId)
-    val discount = rule(cart)
-    val updatedCart = updateAmount(cart, discount)
-    save(updatedCart, storage)
-  }
-
-  def applyDiscountIfs(cartId: CartId, storage: Storage[Cart]): Unit = {
-    val cart = loadCart(cartId)
-    if (cart != Cart.missingCart) {
-      val rule = lookupDiscountRule(cart.customerId)
-      if (rule != DiscountRule.noDiscount) {
-        val discount = rule(cart)
-        val updatedCart = updateAmount(cart, discount)
-        save(updatedCart, storage)
-      }
-    }
   }
 
   private def loadCartResult(cartId: CartId): BoolResult[Cart] = {
