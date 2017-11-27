@@ -4,11 +4,18 @@ import org.fprefactoring.Models._
 
 object App {
 
+  case class FoundCartResult()
+  case class NotFoundCartResult()
+  case class FoundDiscountResult()
+  case class NotFoundDiscountResult()
+
   def applyDiscount(cartId: CartId, storage: Storage[Cart]): Unit = {
     val cart = loadCart(cartId)
-    if (cart != Cart.missingCart) {
+    val loadResult =if (cart != Cart.missingCart) FoundCartResult() else NotFoundCartResult()
+      if (cart != Cart.missingCart) {
       val rule = lookupDiscountRule(cart.customerId)
-      if (rule != DiscountRule.noDiscount) {
+     val lookupResult =  if (rule != DiscountRule.noDiscount) FoundDiscountResult() else NotFoundDiscountResult()
+        if (rule != DiscountRule.noDiscount) {
         val discount = rule(cart)
         val updatedCart = updateAmount(cart, discount)
         save(updatedCart, storage)
