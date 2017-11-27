@@ -55,14 +55,13 @@ object App {
     }
   }
 
-  private def loadCartResult(cartId: CartId): BoolResult[Cart] = {
+  private def loadCartResult(cartId: CartId): Option[Cart] = {
     val cart = loadCart(cartId)
-    if (cart != Cart.missingCart) TrueResult(cart) else FalseResult()
+    if (cart != Cart.missingCart) Some(cart) else None
   }
-
-  private def lookupDiscountRuleResult(cart: Cart): BoolResult[DiscountRule] = {
+  private def lookupDiscountRuleResult(cart: Cart): Option[DiscountRule] = {
     val rule = lookupDiscountRule(cart.customerId)
-    if (rule != DiscountRule.noDiscount) TrueResult(rule) else FalseResult()
+    if (rule != DiscountRule.noDiscount) Some(rule) else None
   }
 
   def loadCart(id: CartId): Cart =
