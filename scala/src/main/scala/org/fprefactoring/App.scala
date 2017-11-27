@@ -18,12 +18,16 @@ object App {
   }
 
   def applyDiscount(cartId: CartId, storage: Storage[Cart]): Unit = {
-    val cart = loadCart(cartId)
-    val loadResult = if (cart != Cart.missingCart) TrueResult(cart) else FalseResult()
+    val loadResult = loadCartResult(cartId)
     val rule = loadResult.modifyAndReduce(c => lookupDiscountRuleResult(c))
     val discount = loadResult.modifyAndReduce(c => rule.modify(r => r(c)))
     val updatedCart = loadResult.modifyAndReduce(c => discount.modify(d => updateAmount(c, d)))
     updatedCart.modify(uc => save(uc, storage))
+  }
+
+  private def loadCartResult(cartId: CartId): BoolResult[Cart] = {
+    val cart = loadCart(cartId)
+    if (cart != Cart.missingCart) TrueResult(cart) else FalseResult()
   }
 
   private def lookupDiscountRuleResult(cart: Cart): BoolResult[DiscountRule] = {
