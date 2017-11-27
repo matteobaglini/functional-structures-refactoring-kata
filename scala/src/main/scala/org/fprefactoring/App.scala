@@ -4,12 +4,16 @@ import org.fprefactoring.Models._
 
 object App {
 
+  // BoolResult is an interface/contract and it's called a Data Type.
+  // It's modelled as an Algebraic Data Type (ADT) of type Sum/Union Type.
   trait BoolResult[+A] {
+    // all the defined function represents the ADT's combinators
     def map[B](f: A => B): BoolResult[B]
     def flatMap[B](f: A => BoolResult[B]): BoolResult[B]
     def apply[B](cfab: BoolResult[A => B]): BoolResult[B]
     def map2[B, C](cb: BoolResult[B])(f: (A, B) => C): BoolResult[C]
   }
+  // TrueResult and FalseResult are concrete objects and they are called Data Constructors.
   case class TrueResult[A](value: A) extends BoolResult[A] {
     override def map[B](f: (A) => B): BoolResult[B] = TrueResult(f(value))
     override def flatMap[B](f: (A) => BoolResult[B]): BoolResult[B] = f(value)
