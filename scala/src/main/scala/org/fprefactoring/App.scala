@@ -5,24 +5,24 @@ import org.fprefactoring.Models._
 object App {
 
   trait BoolResult[+A] {
-    def modify[B](f: A => B): BoolResult[B]
-    def modifyAndReduce[B](f: A => BoolResult[B]): BoolResult[B]
+    def map[B](f: A => B): BoolResult[B]
+    def flatMap[B](f: A => BoolResult[B]): BoolResult[B]
   }
   case class TrueResult[A](value: A) extends BoolResult[A] {
-    override def modify[B](f: (A) => B): BoolResult[B] = TrueResult(f(value))
-    override def modifyAndReduce[B](f: (A) => BoolResult[B]): BoolResult[B] = f(value)
+    override def map[B](f: (A) => B): BoolResult[B] = TrueResult(f(value))
+    override def flatMap[B](f: (A) => BoolResult[B]): BoolResult[B] = f(value)
   }
   case class FalseResult[A]() extends BoolResult[A] {
-    override def modify[B](f: (A) => B): BoolResult[B] = FalseResult()
-    override def modifyAndReduce[B](f: (A) => BoolResult[B]): BoolResult[B] = FalseResult()
+    override def map[B](f: (A) => B): BoolResult[B] = FalseResult()
+    override def flatMap[B](f: (A) => BoolResult[B]): BoolResult[B] = FalseResult()
   }
 
   def applyDiscount(cartId: CartId, storage: Storage[Cart]): Unit = {
     val cart = loadCartResult(cartId)
-    val rule = cart.modifyAndReduce(c => lookupDiscountRuleResult(c))
-    val discount = cart.modifyAndReduce(c => rule.modify(r => r(c)))
-    val updatedCart = cart.modifyAndReduce(c => discount.modify(d => updateAmount(c, d)))
-    updatedCart.modify(uc => save(uc, storage))
+    val rule = cart.flatMap(c => lookupDiscountRuleResult(c))
+    val discount = cart.flatMap(c => rule.map(r => r(c)))
+    val updatedCart = cart.flatMap(c => discount.map(d => updateAmount(c, d)))
+    updatedCart.map(uc => save(uc, storage))
   }
 
   def applyDiscountIdeal(cartId: CartId, storage: Storage[Cart]): Unit = {
