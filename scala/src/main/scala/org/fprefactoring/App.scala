@@ -18,6 +18,16 @@ object App {
   }
 
   def applyDiscount(cartId: CartId, storage: Storage[Cart]): Unit = {
+    for {
+      cart <- loadCartResult(cartId)
+      rule <- lookupDiscountRuleResult(cart)
+      discount = rule(cart)
+      updated = updateAmount(cart, discount)
+      _ = save(updated, storage)
+    } yield ()
+  }
+
+  def applyDiscountManual(cartId: CartId, storage: Storage[Cart]): Unit = {
     val cart = loadCartResult(cartId)
     val rule = cart.flatMap(c => lookupDiscountRuleResult(c))
     val discount = cart.flatMap(c => rule.map(r => r(c)))
