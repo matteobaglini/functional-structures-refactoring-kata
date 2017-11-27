@@ -18,8 +18,8 @@ object App {
     val cart = loadCart(cartId)
     val loadResult = if (cart != Cart.missingCart) TrueResult(cart) else FalseResult()
     if (cart != Cart.missingCart) {
-      val lookupResult = lookupDiscountRuleResult(cart)
-      val discount = lookupResult.applyFunc(r => r(cart))
+      val rule = lookupDiscountRuleResult(cart)
+      val discount = rule.applyFunc(r => r(cart))
       val updatedCart = discount.applyFunc(d => updateAmount(cart, d))
       updatedCart.applyFunc(uc => save(uc, storage))
     }
