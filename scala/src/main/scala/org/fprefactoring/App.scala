@@ -32,8 +32,8 @@ object App {
   def applyDiscount(cartId: CartId, storage: Storage[Cart]): Unit = {
     val cart = loadCartResult(cartId)
     val rule = cart.flatMap(c => lookupDiscountRuleResult(c))
-    val discount = cart.flatMap(c => rule.map(r => r(c)))
-    val updatedCart = cart.flatMap(c => discount.map(d => updateAmount(c, d)))
+    val discount = cart.apply(rule)
+    val updatedCart = cart.map2(discount)(updateAmount)
     updatedCart.map(uc => save(uc, storage))
   }
 
