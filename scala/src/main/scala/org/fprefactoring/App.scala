@@ -55,16 +55,14 @@ object App {
     }
   }
 
-  import scala.util.{Failure, Success, Try}
-
-  private def loadCartResult(cartId: CartId): Try[Cart] = {
+  private def loadCartResult(cartId: CartId): BoolResult[Cart] = {
     val cart = loadCart(cartId)
-    if (cart != Cart.missingCart) Success(cart) else Failure(new RuntimeException("missing cart"))
+    if (cart != Cart.missingCart) TrueResult(cart) else FalseResult()
   }
 
-  private def lookupDiscountRuleResult(cart: Cart): Try[DiscountRule] = {
+  private def lookupDiscountRuleResult(cart: Cart): BoolResult[DiscountRule] = {
     val rule = lookupDiscountRule(cart.customerId)
-    if (rule != DiscountRule.noDiscount) Success(rule) else Failure(new RuntimeException("no discount"))
+    if (rule != DiscountRule.noDiscount) TrueResult(rule) else FalseResult()
   }
 
   def loadCart(id: CartId): Cart =
