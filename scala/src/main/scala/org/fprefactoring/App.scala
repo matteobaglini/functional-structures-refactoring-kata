@@ -4,8 +4,9 @@ import org.fprefactoring.Models._
 
 object App {
 
-  case class FoundResult[A](value: A)
-  case class NotFoundResult()
+  trait LoadResult[+A]
+  case class FoundResult[A](value: A) extends LoadResult[A]
+  case class NotFoundResult[A]() extends LoadResult[A]
 
   def applyDiscount(cartId: CartId, storage: Storage[Cart]): Unit = {
     val cart = loadCart(cartId)
