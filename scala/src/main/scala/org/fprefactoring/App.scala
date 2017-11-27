@@ -33,6 +33,18 @@ object App {
     save(updatedCart, storage)
   }
 
+  def applyDiscountIfs(cartId: CartId, storage: Storage[Cart]): Unit = {
+    val cart = loadCart(cartId)
+    if (cart != Cart.missingCart) {
+      val rule = lookupDiscountRule(cart.customerId)
+      if (rule != DiscountRule.noDiscount) {
+        val discount = rule(cart)
+        val updatedCart = updateAmount(cart, discount)
+        save(updatedCart, storage)
+      }
+    }
+  }
+
   private def loadCartResult(cartId: CartId): BoolResult[Cart] = {
     val cart = loadCart(cartId)
     if (cart != Cart.missingCart) TrueResult(cart) else FalseResult()
