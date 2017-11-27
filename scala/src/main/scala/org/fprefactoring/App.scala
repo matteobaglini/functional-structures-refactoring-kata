@@ -55,14 +55,16 @@ object App {
     }
   }
 
-  type Error = String
-  private def loadCartResult(cartId: CartId): Either[Error, Cart] = {
+  import scala.util.{Failure, Success, Try}
+
+  private def loadCartResult(cartId: CartId): Try[Cart] = {
     val cart = loadCart(cartId)
-    if (cart != Cart.missingCart) Right(cart) else Left("missing cart")
+    if (cart != Cart.missingCart) Success(cart) else Failure(new RuntimeException("missing cart"))
   }
-  private def lookupDiscountRuleResult(cart: Cart): Either[Error, DiscountRule] = {
+
+  private def lookupDiscountRuleResult(cart: Cart): Try[DiscountRule] = {
     val rule = lookupDiscountRule(cart.customerId)
-    if (rule != DiscountRule.noDiscount) Right(rule) else Left("no discount")
+    if (rule != DiscountRule.noDiscount) Success(rule) else Failure(new RuntimeException("no discount"))
   }
 
   def loadCart(id: CartId): Cart =
