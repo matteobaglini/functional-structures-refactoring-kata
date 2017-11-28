@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2006
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunctionalRefactoring.Tests", "FunctionalRefactoring.Tests\FunctionalRefactoring.Tests.csproj", "{5BB7E114-EFD4-462D-82EC-8CA6D782432A}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FunctionalRefactoring", "FunctionalRefactoring\FunctionalRefactoring.fsproj", "{CCFC6382-4EA5-46CA-A317-D8BA51272445}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5BB7E114-EFD4-462D-82EC-8CA6D782432A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BB7E114-EFD4-462D-82EC-8CA6D782432A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BB7E114-EFD4-462D-82EC-8CA6D782432A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BB7E114-EFD4-462D-82EC-8CA6D782432A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCFC6382-4EA5-46CA-A317-D8BA51272445}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCFC6382-4EA5-46CA-A317-D8BA51272445}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCFC6382-4EA5-46CA-A317-D8BA51272445}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCFC6382-4EA5-46CA-A317-D8BA51272445}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FE5044EA-1BEE-4B3E-86E0-494013B2DB03}
+	EndGlobalSection
+EndGlobal
