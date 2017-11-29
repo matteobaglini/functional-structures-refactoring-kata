@@ -1,0 +1,36 @@
+{
+  "name": "functional-structures-refactoring-kata",
+  "version": "1.0.0",
+  "description": "This refactoring kata aims to let you practice with one of the main functional programming building block: Functional Structures.",
+  "scripts": {
+    "test": "mocha --require ts-node/register test/**/*.ts",
+    "test:auto": "npm test -- --watch-extensions ts,tsx --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matteobaglini/functional-structures-refactoring-kata.git"
+  },
+  "keywords": [
+    "refactoring",
+    "functional",
+    "kata"
+  ],
+  "author": "Claudio Bartoli <claudio@barto.li>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/matteobaglini/functional-structures-refactoring-kata/issues"
+  },
+  "homepage": "https://github.com/matteobaglini/functional-structures-refactoring-kata#readme",
+  "devDependencies": {
+    "@types/lodash": "^4.14.86",
+    "@types/chai": "^4.0.6",
+    "@types/mocha": "^2.2.44",
+    "chai": "^4.1.2",
+    "mocha": "^4.0.1",
+    "ts-node": "^3.3.0",
+    "typescript": "^2.6.2"
+  },
+  "dependencies": {
+    "lodash": "^4.17.4"
+  }
+}
