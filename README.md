@@ -2,9 +2,7 @@
 
 This refactoring kata aims to let you practice with one of the main functional programming building block: **Functional Structures**.
 
-The starting code implements a use case with an imperative approach. Your mission is to **remove every effects** (aka computational context) within the ``applyDiscount`` function with the power of Functional Structures.
-
-The code is implemented in different languages. Is your favorite language missing? Please consider to contribute with a Pull Request or open an Issue.
+The starting code (provided in different languages) implements a use case with an imperative approach. Your mission is to **remove every effects** (aka computational context) within the ``applyDiscount`` function with the power of Functional Structures.
 
 # How to use this Kata
 
@@ -22,6 +20,10 @@ You can take a look at my refactored code (in Scala) wich you will find inside o
 - [Functional Structures in Scala - Michael Pilquist](https://www.youtube.com/watch?v=Dsd4pc99FSY&list=PLFrwDVdSrYE6dy14XCmUtRAJuhCxuzJp0)
 - [A Pragmatic Introduction to Category Theory - Daniela Sfregola](https://www.youtube.com/watch?v=MvQxNm5gn8g)
 - [Category Theory for the Working Hacker - Philip Wadler](https://www.youtube.com/watch?v=V10hzjgoklA)
+
+## Contributing
+
+Is your favorite language missing? Want to contribute? Awesome! Feel free to submit an Issue or a Pull Request.
 
 # License
 This project is licensed under the terms of the MIT license.
