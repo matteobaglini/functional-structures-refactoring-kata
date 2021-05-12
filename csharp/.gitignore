@@ -8,3 +8,6 @@
 
 ### NuGet ###
 **/packages/*
+
+### Rider
+.idea
